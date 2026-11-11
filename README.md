@@ -23,23 +23,27 @@
 
 ## Install
 
+[![PyPI](https://img.shields.io/pypi/v/depclean)](https://pypi.org/project/depclean/)
+
 With [uv](https://docs.astral.sh/uv/):
 
 ```bash
-uv tool install git+https://github.com/magnumnighthawk/depclean
+uv tool install depclean
 ```
 
 or with [pipx](https://pipx.pypa.io/):
 
 ```bash
-pipx install git+https://github.com/magnumnighthawk/depclean
+pipx install depclean
 ```
 
 Or try it without installing:
 
 ```bash
-uvx --from git+https://github.com/magnumnighthawk/depclean depclean ~/code
+uvx depclean ~/code
 ```
+
+To get the latest unreleased version, install from GitHub instead: `uv tool install git+https://github.com/magnumnighthawk/depclean`.
 
 It's tested on macOS and Linux. On Windows it should work through `windows-curses`, which is installed automatically, but that hasn't been tested.
 
@@ -103,13 +107,12 @@ uv run ruff check
 uv run depclean --list ~/code
 ```
 
-### Releasing to PyPI
+### Releasing
 
-`.github/workflows/release.yml` publishes to PyPI with [trusted publishing](https://docs.pypi.org/trusted-publishers/) whenever a `v*` tag is pushed. One-time setup: on PyPI, add a pending publisher for project `depclean`, repository `magnumnighthawk/depclean`, workflow `release.yml`, environment `pypi`. Then:
+Pushing a `v*` tag publishes to [PyPI](https://pypi.org/project/depclean/) using trusted publishing and creates a GitHub release (see `.github/workflows/release.yml`). To release:
 
-```bash
-git tag v0.1.0 && git push --tags
-```
+1. Bump `__version__` in `src/depclean/__init__.py` and add an entry to `CHANGELOG.md`.
+2. Commit, then run `git tag vX.Y.Z && git push && git push --tags`.
 
 ## License
 
