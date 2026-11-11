@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "depclean"
+dynamic = ["version"]
+description = "Terminal UI to find and remove node_modules, Python venvs and other reinstallable dependency folders"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Karthick Ramakrishnan" }]
+requires-python = ">=3.9"
+dependencies = ['windows-curses>=2.3; sys_platform == "win32"']
+keywords = ["cleanup", "disk-space", "node_modules", "venv", "tui", "cli"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console :: Curses",
+  "Intended Audience :: Developers",
+  "Operating System :: MacOS",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Topic :: System :: Filesystems",
+  "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/magnumnighthawk/depclean"
+Issues = "https://github.com/magnumnighthawk/depclean/issues"
+
+[project.scripts]
+depclean = "depclean.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.hatch.version]
+path = "src/depclean/__init__.py"
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["UP006", "UP007", "UP035", "UP045"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
