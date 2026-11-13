@@ -2,18 +2,7 @@
 
 **Get disk space back from projects you aren't working on.** `depclean` scans a folder of code, finds the dependency and cache folders that a reinstall brings back (`node_modules`, Python virtualenvs, Rust `target`, build caches, …), shows how much space each project would free, and lets you pick what to remove in a keyboard-driven terminal UI.
 
-```
- depclean  ~/code                                                    ? help
- 14 projects · 9.8 GB reclaimable · 3 selected (4.1 GB)       ⠼ sizing 2 folders
-      PROJECT                       FOLDERS                       SIZE ↓  MODIFIED
-▸ [x] old-dashboard                 node_modules, .next           2.3 GB      1.4y
-▾ [-] ml-experiments                .venv, __pycache__ ×12        1.9 GB       8mo
-      [x] .venv                     python venv                   1.8 GB
-      [ ] src/__pycache__           python cache                  2.1 MB
-▸ [ ] side-project                  node_modules ×3               1.2 GB       12d
-▸ [ ] rust-cli                      target                      780 MB        3mo
- ↑↓ move  space select  a all  enter expand  s sort:size  / filter  d delete  q quit
-```
+![depclean demo: scanning a folder, selecting a project and freeing 537 MB](https://raw.githubusercontent.com/magnumnighthawk/depclean/main/docs/demo.gif)
 
 - **Safe by design**: it only matches a folder when a marker proves what it is (for example, `target` only next to a `Cargo.toml`, and a virtualenv only if it contains `pyvenv.cfg`). It never follows symlinks, never touches `.git`, and checks each folder again right before deleting it.
 - **Fast**: it shows results right away and measures sizes in the background, updating them live.
@@ -106,6 +95,8 @@ uv run pytest
 uv run ruff check
 uv run depclean --list ~/code
 ```
+
+To re-record the demo GIF, see the header of [`docs/demo.tape`](docs/demo.tape) (needs [vhs](https://github.com/charmbracelet/vhs)).
 
 ### Releasing
 
